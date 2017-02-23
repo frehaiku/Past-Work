@@ -1,0 +1,9 @@
+html{
+    max-width: 640px!important;
+    margin: 0 auto;
+    overflow: auto;
+}
+body{
+    max-width: 640px;
+    position: relative;
+}

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-cn">
 
 <head>
     <meta charset="UTF-8">
@@ -8,6 +8,8 @@
     <import type="js" file="js.bootstrap" />
     <import type="js" file="js.add" />
     <import type="css" file="css.bootstrap,css.add" />
+    <import type="css" file="css.max-width" />
+
     <title>发布商品 | 惠州高中生网跳蚤市场</title>
 </head>
 
@@ -18,7 +20,7 @@
                 <span class="glyphicon glyphicon-menu-left" aria-hidden="true" aria-hidden="true"></span> 返回列表
             </a>
         </div>
-        <div class="container">
+        <div >
         <form method="POST" action="{:U('upload')}" enctype="multipart/form-data" style="width:100%;height:100%;" name="UploadFile">
             <div class="col-xs-12" id="AddFile">
                 <input type="file" name="AddPic" id="AddPic" class="form-control" style="opacity:0;" onchange="previewImage(this)" accept="image/*">

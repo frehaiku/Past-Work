@@ -8,10 +8,13 @@
 ## Installation
 
 1. Clone
+
     ```bash
    git clone https://github.com/frehaiku/Past-Work.git
     ```
+    
 2. Modify the db config(`Application/Home/Conf/config.php`)
+
     ```php
     <?php
     return array(
@@ -24,4 +27,20 @@
         'DB_PREFIX'             =>  'goods',
     );
     ```
-3. insert `.sql` to your database
+
+3. Insert `.sql` to your database
+
+## Dependence
+
+- Frontend : `BootStrap`、`Jquery`
+- Backend : `Thinkphp`、`wechatSDK`
+- The `wechatSDK` write in [Repository](https://github.com/frehaiku/wechatAPI)
+
+
+## Demo
+
+- [Click here](http://www.hkuboss.cn/fleamarket/)
+- WeChat Display
+    1. Follow "驴行记" official Account
+    2. Send the message "2015二手市场"
+    3. Click the href enter into the Work

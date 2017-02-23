@@ -1,8 +1,11 @@
 $(document).ready(function() {
 
     var temp = 1;
-    $("#Issue").click(function() {
+    var tabEvent = 'ontouchstart' in document ? 'touchstart' : 'click';
 
+    $("#Issue").on(tabEvent, function() {
+
+        // alert(tabEvent);
         if (temp) {
             //将箭头翻转
             $("#ArrowUp").css({

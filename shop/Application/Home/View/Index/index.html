@@ -1,0 +1,257 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-touch-fullscreen" content="yes">
+    <!-- Local bootstrap CSS & JS -->
+    <import type="js" file="js.jquery" />
+    <import type="js" file="js.bootstrap" />
+    <import type="js" file="js.index,js.demo,js.snap" />
+    <import type="css" file="css.bootstrap,css.index" />
+    <import type="css" file="css.snap,css.demo" />
+    <!--<link rel="stylesheet" media="screen" href="css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="css/index.css">
+
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/index.js"></script>-->
+    <title>首页 | 惠州高中生网跳蚤市场</title>
+</head>
+
+<body style="font-family:'微软雅黑';">
+
+    
+    <div class="snap-drawers">
+            <div class="snap-drawer snap-drawer-left">
+                <div>
+                    <ul>
+                        <li><a href="{:U('index',array('p'=>1))}">全部学校</a></li>
+                        <li><a href="{:U('index',array('p'=>1))}&school={$school_name}">我的学校</a></li>
+                        <li><a href="{:U('Detail/person')}">个人中心</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="snap-drawer snap-drawer-right"></div>
+        </div>
+    
+    
+    <div id="content" class="snap-content">
+         <!--<div id="toolbar">-->
+         <!--    <a href="#" id="open-left"></a>-->
+         <!--</div>-->
+        <div class="col-xs-12">
+            <div id="Issue" class="col-xs-6">
+                点我发布
+                <span id="ArrowUp" class="glyphicon glyphicon-menu-up" aria-hidden="true"></span>
+            </div>
+
+            <div id="Search" class="col-xs-2 ">
+                <button type="button" class="btn btn-lg btn-default col-xs-offset-3" style="border:0;background:#06cab4;margin-top:10px;outline: none;">
+                    <a href="{:U('Detail/search')}" style="color:rgba(255,255,255,0.7);"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></a>
+                </button>
+            </div>
+
+            <!--<div id="Home" class="col-xs-2 col-xs-offset-1">-->
+            <!--    <button type="button" class="btn btn-lg btn-default col-xs-offset-3" style="border:0;background:#06cab4;margin-top:10px;">-->
+            <!--        <a href="{:U('Detail/person')}" style="color:rgba(255,255,255,0.7);"><span class="glyphicon glyphicon-user" aria-hidden="true"></span></a>-->
+            <!--    </button>-->
+            <!--</div>-->
+            <a href="#" id="open-left" class="col-xs-2 col-xs-offset-2" style="position:absolute;right:30px;">
+                
+                    <button type="button" class="btn btn-lg btn-default" style="border:0;background:#06cab4;margin-top:10px;outline: none;">
+                    <span class="glyphicon glyphicon-list" aria-hidden="true" style="color:rgba(255,255,255,0.7)!important;">
+                    </span>
+                    </button>
+                
+            </a>
+            <!--<div id="toolbar" class="col-xs-2">-->
+                
+            <!--</div>-->
+            <!-- 隐藏发布框start -->
+            <div id="IssueDetail" class="col-xs-12" style="padding:0px;">
+                <foreach name="type" item="vo" key="k">
+                    <a href="
+            {:U('add',array('type'=>urlencode($vo['goodstype'])))}
+            " class="Issue{$k+1} col-xs-6">
+                        <span id="Goods{$k+1}">{$vo.goodstype}</span>
+                    </a>
+                </foreach>
+            </div>
+            <!-- 隐藏发布框end -->
+            <!--学校名称start-->
+            <div class="col-xs-12">
+                <h5 id="sch_name">
+                
+			    <!--<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">-->
+       <!--             全部学校-->
+       <!--         <span class="caret"></span>-->
+       <!--         </button>-->
+       <!--         <ul class="dropdown-menu">-->
+       <!-- 				<foreach name="select_school" item="vo" key="k">-->
+       <!--     				<li>-->
+       <!--         				<a href="{:U('index',array('school'=>$vo['schoolname']))}">-->
+       <!--         				    {$vo.schoolname}   （已有{$arr_jilv_count[$k]}件商品）-->
+       <!--         				</a>-->
+       <!--     				</li>-->
+       <!-- 				</foreach>-->
+       <!-- 		 </ul>-->
+			    <!--二手市场-->
+			    <select class="form-control" id="select_sch">
+			        <!--<if condition="Think.get.school" value="">-->
+			            <option value="&p=1">全部学校二手市场</option>
+			        <!--    </else>-->
+			        <!--    <option>{$Think.get.school}二手市场</option>-->
+			        <!--</if>-->
+			        
+			        <foreach name="select_school" item="vo" key="k">
+			            <!--没有参数时，默认不处理-->
+			            <if condition="$Think.get.school eq ''">
+			             <!--没有参数时，11-->
+			                <option value="{$vo.schoolname}">{$vo.schoolname} （{$arr_jilv_count[$k]}件）</option>
+			                <else/>   
+			                 <!--没有参数时，22-->
+			                    <!--有参数时，判断参数和option一样的选项-->
+    			                <if condition="$Think.get.school eq $vo['schoolname']">
+    			                    <option value="{$vo.schoolname}" selected>{$vo.schoolname} （{$arr_jilv_count[$k]}件）</option>
+    			                    <else/>
+    			                    <option value="{$vo.schoolname}">{$vo.schoolname} （{$arr_jilv_count[$k]}件）</option>
+    			                </if>
+			            </if>
+                        
+                    </foreach>
+                </select>
+            </h5>
+            </div>
+            
+                
+    <!--        <button type="button" class="btn btn-default" id="MySchool">-->
+				<!--<a href="{:U('index',array('p'=>1))}&school={$school_name}">我的学校</a>-->
+				<!--</button>-->
+				
+                
+			
+               
+            
+            
+            <!--学校名称end-->
+            <div id="nav_top" class="col-xs-12">
+                <ul>
+                    <li class="col-xs-1"><a href="{:U('index',array('p'=>1))}&school={$Think.get.school}">全部</a></li>
+                    <foreach name="type" item="vo" key="k">
+                        <if condition="$k eq 1">
+                            <!-- <if condition="$index_param_type eq $vo['goodstype']"> -->
+                            <li class="col-xs-2">
+                                <a href="{:U('index',array('type'=>urlencode($vo['goodstype']),'p'=>1))}&school={$Think.get.school}">
+                                    {$vo.goodstype}
+                                </a>
+                            </li>
+                            <!-- <else /> -->
+                            <li class="col-xs-2">
+                                <a href="{:U('index',array('type'=>urlencode($vo['goodstype']),'p'=>1))}&school={$Think.get.school}">
+                                    {$vo.goodstype}
+                                </a>
+                            </li>
+                            <!--  </if> -->
+                            <else />
+                            <!-- <if condition="$index_param_type eq $vo['goodstype']"> -->
+                            <li class="col-xs-3">
+                                <a href="{:U('index',array('type'=>urlencode($vo['goodstype']),'p'=>1))}&school={$Think.get.school}">
+                                    {$vo.goodstype}
+                                </a>
+                            </li>
+                            <!-- <else /> -->
+                            <li class="col-xs-3">
+                                <a href="{:U('index',array('type'=>urlencode($vo['goodstype']),'p'=>1))}&school={$Think.get.school}">
+                                    {$vo.goodstype}
+                                </a>
+                            </li>
+                            <!-- </if> -->
+                        </if>
+                    </foreach>
+                </ul>
+            </div>
+            <!-- 具体展示栏目start -->
+            <if condition="$index_param_type eq ''">
+            <div id="IssueContent" class="col-xs-12">
+                <ul class="content_ul">
+                    
+                        <foreach name="alllist" item="vo">
+                            <a href="{:U('Detail/detail',array('type'=>urlencode($index_param_type),'id'=>$vo['id']))}" class="a_detail">
+                                <li class="detail_block">
+                                    <php>
+                                        $formatUrl = '__ROOT__/' . preg_replace('/^\/\./', '', $vo['goodsimageurl']);
+                                    </php>
+                                    <img class="ImageUrl img-responsive" src="{$formatUrl}" width="">
+                                    <p>{$vo.goodsname}</p>
+                                    <div class="describe col-xs-12">
+                                        <span class="price">￥{$vo.goodsprice}</span>
+                                        <span class="date">{$vo.goodstime}</span>
+                                    </div>
+                                </li>
+                            </a>
+                        </foreach>
+                </ul>
+            </div>
+            <ul class="pagination pagination-sm col-xs-12">
+                {$allpage}
+            </ul>
+            <else />
+                <div id="IssueContent" class="col-xs-12">
+                    <ul class="content_ul">
+                        <volist name="block" id="vo" empty="$empty">
+                            <a href="{:U('Detail/detail',array('type'=>urlencode($index_param_type),'id'=>$vo['id']))}" class="a_detail">
+                                <li class="detail_block">
+                                    <php>
+                                        $formatUrl = '__ROOT__/' . preg_replace('/^\/\./', '', $vo['goodsimageurl']);
+                                    </php>
+                                    <img class="ImageUrl img-responsive" src="{$formatUrl}" width="">
+                                    <p>{$vo.goodsname}</p>
+                                    <div class="describe col-xs-12">
+                                        <span class="price">￥{$vo.goodsprice}</span>
+                                        <span class="date">{$vo.goodstime}</span>
+                                    </div>
+                                </li>
+                            </a>
+                        </volist>
+                    </ul>
+                </div>
+            <ul class="pagination pagination-sm col-xs-12">
+                {$page}
+            </ul>
+            </if>
+            <!-- 具体展示栏目end -->
+        </div>
+    </div>
+   
+        <script type="text/javascript">
+            var snapper = new Snap({
+                element: document.getElementById('content'),
+                disable: 'left'
+            });
+            
+        </script>
+     
+        
+</body>
+
+<script>
+$(document).ready(function() {
+    
+    var IssueContentWidth = $("#IssueContent").width();
+     $(".ImageUrl").attr("width", IssueContentWidth / 2);
+
+    // if("{$Think.get.school}" != ""){
+    //     $('#sch_name').css("text-align","left");
+    // }
+    $("#select_sch").change(function(){
+        var param = $(this).val();
+        window.location.href="{:U('index')}"+"&school="+param;
+    });
+    
+});
+</script>
+
+</html>

@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+    <import type="js" file="js.jquery" />
+    <import type="js" file="js.bootstrap" />
+    <import type="js" file="js.add" />
+    <import type="css" file="css.bootstrap,css.add" />
+    <title>发布商品 | 惠州高中生网跳蚤市场</title>
+</head>
+
+<body>
+    
+        <div class="col-xs-12" id="TopNav">
+            <a href="{:U('index','p=1')}" style="color:#000;text-decoration:none;">
+                <span class="glyphicon glyphicon-menu-left" aria-hidden="true" aria-hidden="true"></span> 返回列表
+            </a>
+        </div>
+        <div class="container">
+        <form method="POST" action="{:U('upload')}" enctype="multipart/form-data" style="width:100%;height:100%;" name="UploadFile">
+            <div class="col-xs-12" id="AddFile">
+                <input type="file" name="AddPic" id="AddPic" class="form-control" style="opacity:0;" onchange="previewImage(this)" accept="image/*">
+            </div>
+            <div id="preview" style="display:none;">
+                <img src="" alt="" id="imghead" width="60" height="60">
+            </div>
+            <p style="clear:both">你可以上传1张照片，也可以不配图。</p>
+            <input type="text" name="goodsname" id="GoodsName" class="form-control" placeholder="简述转让的东西">
+            <input type="text" name="goodsprice" id="GoodsPrice" class="form-control" placeholder="简要价格￥,具体可在下面描述">
+            <!--<input type="text" name="contactsname" id="ContactsName" class="form-control" placeholder="联系人">-->
+            <!--<input type="text" name="contactsphone" id="ContactsPhone" class="form-control" placeholder="请留下联系方式,比如,QQ,WeChat等">-->
+            <input type="hidden" name="param_type" id="param_type" value="{$param_type}">
+            <textarea name="goodsdescribe" id="GoodsDescribe" class="form-control" rows="6" placeholder="具体描述一下你要转的东西,价格新旧,类别等,请留下联系方式,比如,QQ,WeChat等"></textarea>
+            <div class="col-xs-12" id="BottomSubmit">
+                <a href="javascript:history.back();" style="position: absolute;left: 10px;top:10px;">
+                    <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                </a>
+                <input type="button" id="Submit" class="btn btn-success col-xs-offset-9" value="立即发布" />
+            </div>
+        </form>
+        </div>
+        <iframe id="iframe_submit" name="iframe_submit" style="display:none;">
+        </iframe>
+    
+    <!-- Toast -->
+    <div id="Toast"></div>
+</body>
+<script>
+// $("Submit").click(function(){
+// 	var data = {
+// 		"GoodsName":$("#GoodsName").val(),
+// 		"GoodsPrice":$("GoodsPrice").val(),
+// 		"GoodsContacts":$("GoodsContacts").val(),
+// 		"GoodsPhone":$("#GoodsPhone").val(),
+// 		"GoodsDescibe":$("#GoodsDescibe").val()
+// 	};
+// 	$.ajax({
+// 		url:"{:U('submit_ajax')}",
+// 		data:data,
+// 		type:"post",
+// 		dataType:"json",
+// 		error:function(){
+// 			alert("服务器异常");
+// 		},
+// 		success:function(){
+
+// 		}
+// 	});
+// });
+
+
+//让fixed定位的元素不遮挡描述
+                var ButHgt = $("#BottomSubmit").height();
+                var SelfHgt = $("body").height();
+                console.log(SelfHgt);
+                $("body").height(SelfHgt + ButHgt);
+
+//点击提交校验表单
+
+/*用replace方法检测空格*/
+function replaceF(str) {
+    str.replace(/(\s|\u00A0)+|(\s|\u00A0)+/g, '');
+}
+//检测左边字符串左边trim
+function LTrim(str) {
+    if (str.charAt(0) == "") {
+        str = str.slice(1);
+        str = LTrim(str);
+    }
+    return str;
+}
+//右边
+function RTrim(str) {
+    if (str.charAt[str.length - 1] = "") {
+        str = str.slice(0, str.length - 1);
+        str = RTrim(str);
+    }
+    return str;
+}
+
+function CheckNull(o, error) {
+
+    for (var i = 0; i < o.length; i++) {
+        //当有三个参数时
+        term = arguments[2] ? (o[i].value.length < 1 && o[i].type == arguments[2]) : o[i].value.length < 1;
+
+        if (term) {
+            alert(error);
+            o[i].style.border = "1px solid red";
+            break;
+            return false;
+        }
+        if (i == o.length - 1) {
+            return true;
+        }
+    }
+}
+
+function CheckBlur(o) {
+    for (var i = 0; i < o.length; i++) {
+        o[i].onblur = function() {
+            if (this.value.length > 0)
+                this.style.border = "1px solid #ccc";
+        }
+    }
+}
+var input = document.getElementsByTagName('input');
+var textarea = document.getElementsByTagName('textarea');
+var Toast = document.getElementById('Toast');
+var submit = document.getElementById('Submit');
+
+window.onload = function() {
+
+    submit.addEventListener('click', CheckForm, false);
+
+    function CheckForm() {
+
+        if (CheckNull(input, "不能为空", 'text')) {
+            if (CheckNull(textarea, "描述框不能为空")) {
+                document.UploadFile.submit();
+            }
+        }
+        CheckBlur(input);
+        CheckBlur(textarea);
+        // document.UploadFile.submit();
+
+    }
+
+}
+
+// var status = "{$status}";
+// if(status == 200){
+// 	$("Toast").removeClass("effect");
+// 	$("Toast").html("{$SuccessDetail}");
+// 	$("Toast").addClass("effect");
+// }else{
+// 	$("Toast").removeClass("effect");
+// 	$("Toast").html("{$ErrorDetail}");
+// 	$("Toast").addClass("effect");
+// }
+</script>
+
+</html>

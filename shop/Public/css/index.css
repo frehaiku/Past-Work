@@ -1,0 +1,140 @@
+*{font-family:'微软雅黑';list-style: none;}
+#Issue{
+	font-size:18px;
+	padding: 20px 10px;
+}
+#Issue #ArrowUp{
+	-webkit-transform:rotate(0deg);
+	        transform:rotate(0deg);
+	-webkit-transition:all .3s ease-in;
+            transition:all .3s ease-in;
+}
+#IssueDetail{
+	position: absolute;
+	top: 60px;
+	left:0px;
+	z-index: 10;
+	padding: 0px!important;
+	background-color:#06cab4;
+	-webkit-transform:translateY(-260px);
+	        transform:translateY(-260px);
+	-webkit-transition:all .3s ease-out;
+    transition:all .3s ease-out;
+}
+#IssueDetail a{
+	display: block;
+	height: 100px;
+	color:#fff;
+
+}
+#IssueDetail a:hover{
+	text-decoration:none;
+}
+#IssueDetail a span{
+	
+	padding-top: 63px;
+	text-align: center;
+}
+#IssueDetail .Issue1 #Goods1{
+	display: block;
+	background:url(../images/bike_icon.png) no-repeat center ;
+	background-size: 50px;
+}
+#IssueDetail .Issue2 #Goods2{
+	display: block;
+	background:url(../images/phone_icon.png) no-repeat center;
+	background-size: 50px;
+}
+#IssueDetail .Issue3 #Goods3{
+	display: block;
+	background:url(../images/more_icon.png) no-repeat center ;
+	background-size: 50px;
+}
+#IssueDetail .Issue4 #Goods4{
+	display: block;
+	background:url(../images/book_icon.png) no-repeat center ;
+	background-size: 50px;
+	
+}
+#nav_top{
+	background-color: #06cab4;
+	padding:5px 0;
+}
+#nav_top ul{
+	padding: 0px;
+}
+
+#nav_top ul li:nth-child(4){
+	text-indent: 15px;
+}
+#nav_top ul li{
+	text-align: center;
+
+}
+#nav_top ul li a{
+	font-size: 11px;
+	color:rgba(255,255,255,.7);
+	 
+	text-decoration: none;
+}
+#IssueContent{
+	
+}
+#IssueContent ul.content_ul{
+	-webkit-column-width:100px;
+	   -moz-column-width:100px;
+	        column-width:100px;
+	        -webkit-column-count:2;
+	           -moz-column-count:2;
+	                column-count:2;
+	                -webkit-column-gap:0px;
+	                   -moz-column-gap:0px;
+	                        column-gap:0px;
+		padding: 0px;
+	/*display: inline-block;*/
+}
+#IssueContent ul.content_ul li.detail_block{
+	border-radius: 60px / 5px;
+	box-shadow: 0px 0px 35px rgba(0, 0, 0, 0.1) inset;
+	border:1px solid #ccc;
+	display:inline-block;
+	background: linear-gradient(0 0 270deg, #f3f3f3, #f3f3f3 10%, #fff);
+	margin-top: 10px;
+	clear: both;
+}
+#IssueContent ul li .price{
+	color:orange;
+	margin-left: 3px;
+	float: left;
+}
+.describe{
+	padding:0px 5px;
+	margin-bottom: 10px;
+}
+#IssueContent ul li .date{
+	margin-right: 10px;
+	float: right;
+	font-size: 10px;
+}
+#IssueContent ul li .describe{
+	line-height: 10px;
+}
+.border_bottom{
+	border-bottom:1px solid #fff;
+	color:#fff!important;
+}
+.a_detail{
+	color:#000;
+	text-decoration: none;
+}
+#sch_name{
+    padding:10px;
+    text-align:center;
+    background-color: #06cab4;
+    color:#fff;
+}
+#MySchool{
+    position:absolute;
+    right:0px;
+    top:10px;
+}

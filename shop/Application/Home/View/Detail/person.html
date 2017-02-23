@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>个人中心 | 惠州高中生网跳蚤市场</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" />
+    <import type="css" file="css.bootstrap,css.person" />
+    <import type="js" file="js.jquery,js.bootstrap" />
+</head>
+
+<body style="background:#ececec">
+    
+        <h2>我的订单</h2>
+        <!-- 下拉框 start-->
+        <div class="btn-group col-xs-offset-5" id="SelectType" style="float:left;">
+            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <if condition="$already_type eq ''">
+                    全部
+                    <else /> {$select_font['goodstype']}
+                </if><span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu">
+                <li><a href="{:U('Detail/person',array('status'=>$already_status))}">全部</a></li>
+                <foreach name="all_type" item="vo">
+                    <!-- 判断status参数是否为空，为空时不显示 -->
+                    <if condition="$already_status neq ''">
+                        <li><a href="{:U('Detail/person',array('status'=>$already_status,'type'=>$vo['typeid']))}">{$vo.goodstype}</a></li>
+                        <else />
+                        <li><a href="{:U('Detail/person',array('type'=>$vo['typeid']))}">{$vo.goodstype}</a></li>
+                    </if>
+                </foreach>
+            </ul>
+        </div>
+        <!-- 下拉框 end-->
+        <div id="Home" class="col-xs-2 col-xs-offset-9" style="float:left;position:absolute;top:5px;">
+                <button type="button" class="btn btn-lg btn-default " style="border:0;background:#06cab4;margin-top:10px;">
+                    <a href="{:U('Index/index','p=1')}" style="color:rgba(255,255,255,0.7);"><span class="glyphicon glyphicon-home" aria-hidden="true"></span></a>
+
+                </button>
+            </div>
+        <div class="col-xs-12" id="WrapColumn">
+            <div class="col-xs-3 column">
+                <if condition="$already_type neq ''">
+                    <a href="{:U('Detail/person',array('type'=>$already_type))}" data-href="">全部</a>
+                    <!-- <a href="javascript:;" data-href="{:U('Detail/person',array('type'=>$already_type))}">全部</a> -->
+                    <else />
+                   <!--  <a href="javascript:;" data-href="{:U('Detail/person')}">全部</a> -->
+                    <a href="{:U('Detail/person')}" data-href="">全部</a>
+                </if>
+            </div>
+            <foreach name="status" item="vo">
+                <!-- 判断type参数是否为空，为空不显示 -->
+                <if condition="$already_type neq ''">
+                    <div class="col-xs-3 column">
+                        <!-- <a href="javascript:;" data-href="{:U('Detail/person',array('status'=>$vo['statusid'],'type'=>$already_type))}">{$vo.statusdescribe}</a> -->
+                        <a href="{:U('Detail/person',array('status'=>$vo['statusid'],'type'=>$already_type))}" data-href="">{$vo.statusdescribe}</a>
+                    </div>
+                    <else />
+                    <div class="col-xs-3 column">
+                        <!-- <a href="javascript:;" data-href="{:U('Detail/person',array('status'=>$vo['statusid']))}">{$vo.statusdescribe}</a> -->
+                        <a href="{:U('Detail/person',array('status'=>$vo['statusid']))}" data-href="">{$vo.statusdescribe}</a>
+                    </div>
+                </if>
+            </foreach>
+        </div>
+        <foreach name="statusdetail" item="vo">
+            <div class="col-xs-12 record">
+                <div class="col-xs-12 top_section">
+                    <div class="col-xs-4 record_date">{$vo.goodstime}</div>
+                    <div class="col-xs-3 record_status">{$vo.statusdescribe}</div>
+                </div>
+                <div class="col-xs-12 mid_section">
+                    <php>
+                        $formatUrl = '__ROOT__/' . preg_replace('/^\/\./', '', $vo['goodsimageurl']);
+                    </php>
+                    <img src="{$formatUrl}" class="img-responsive" alt="Image" width="80" height="80" style="float:left;">
+                    <div class="col-xs-5 record_describe">{$vo.goodsname}</div>
+                    <div class="col-xs-3 record_price">￥{$vo.goodsprice}</div>
+                </div>
+                <div class="col-xs-12 bottom_section">
+                    <input type="hidden" class="i_hid" value="{$vo.id}">
+                    <button type="button" class="btn btn-default"><a href="{:U('Detail/detail',array('id'=>$vo['id']))}">查看订单</a></button>
+                    <if condition="$vo['statusdescribe'] eq '进行中'">
+                        <button type="button" class="btn btn-default cof_get">确定收货</button>  
+                    </if>
+                </div>
+            </div>
+        </foreach>
+    
+    <script>
+    $(document).ready(function() {
+        $(".img-responsive").each(function() {
+            var imgHgt = $(this).height();
+            $(this).next().css({
+                'height': imgHgt
+            });
+        })
+
+        $(".record_date").each(function(index, element) {
+
+            var content = $(element).html();
+
+
+            $(element).html(content.slice(0, 10));
+        });
+
+        $(".cof_get").click(function() {
+            var is = confirm("确定收货吗?结果无法更改的哦!");
+            if (is) {
+                $.post('{:U('confirm')}', {
+                        id: $(this).parent().find(".i_hid").val()
+                    },
+                    function(data) {
+                        alert(data);
+
+                        window.location.href="{:U('Detail/person','status=2')}";
+                    });
+            }
+        });
+
+        // $(".column").on('click',function(){
+        //     var url = $(this).find('a').attr('data-href');
+        //     window.location.href=url;   
+        //     $(this).find('a').css({'border':'1px solid red'});
+        // });
+        
+    $('.column a').each(function () {
+                if ($($(this))[0].href == String(window.location))
+                    $(this).addClass('border_bottom').attr('href', 'javascript:void(0);');
+            });
+
+    });
+    </script>
+</body>
+
+</html>

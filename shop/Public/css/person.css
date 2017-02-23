@@ -1,0 +1,74 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-family: "微软雅黑";
+}
+
+.column {
+    padding: 10px 0;
+}
+
+#WrapColumn {
+    background-color: #06cab4;
+    text-align: center;
+}
+
+#SelectType {
+    position: absolute;
+    top: 20px;
+}
+
+.column a {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.record {
+    background-color: #fff!important;
+    padding: 10px 10px;
+    margin-top: 10px;
+}
+
+.record .top_section {
+    padding: 5px 0;
+    border-bottom: 1px solid #ececec;
+}
+
+.record_date {
+    float: left;
+}
+
+.record_status {
+    float: right;
+    color: orange;
+}
+.mid_section{
+	margin-top: 10px;
+	padding-bottom: 10px;
+	 border-bottom: 1px solid #ececec;
+}
+.record_describe {
+    float: left;
+    overflow: hidden;
+	white-space:nowrap;
+	word-wrap:break-all;
+    text-overflow: ellipsis;
+}
+.bottom_section{
+	padding:5px;
+}
+.bottom_section button{
+	float:right;
+	margin-right: 10px;
+}
+.bottom_section button a{
+	color:#000;
+	text-decoration: none;
+}
+.record_price {
+    font-size: 13px;
+    float: right;
+}
+.border_bottom{
+	border-bottom:1px solid #fff;
+	color:#fff!important;
+}

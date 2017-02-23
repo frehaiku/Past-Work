@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+        <meta name="viewport" content="width=device-width;initial-scale=1.0;maxinum-scale=1.0;">
+        <meta name="viewport" content="width=device-width,height=device-height,initial-scale=1.0,maxinum-scale=1.0,user-scalebale=no;">
+        <import type="css" file="css.bootstrap" />
+        <import type="js" file="js.jquery,js.bootstrap" />
+        <title>评论管理</title>
+    </head>
+    <body>
+        <h4>评论管理<button type="button" id="btn_com_manage" class="btn btn-info col-xs-offset-2">帖子管理，点这里</button></h4>
+        
+        <script>
+		    $("#btn_com_manage").click(function(){
+		        window.location.href="{:U('Admin/admin')}";
+		    });
+		    
+		</script>
+        
+        <table class="table table-striped">
+            <thead>
+				<tr>
+					<th>举报人id</th>
+					<th>举报人姓名</th>
+					<th>举报人学校</th>
+					<th>被举报人id</th>
+					<th>别举报人姓名</th>
+					<th>被举报人学校</th>
+					<th>被举报的评论内容</th>
+				</tr>
+			</thead>
+			<tbody>
+			    <volist name="comment_claims" id="vo">
+				<tr>
+					<th>{$vo.claim}</th>
+					<th>{$vo.claimzname}</th>
+					<th>{$vo.claimschool}</th>
+					<th>{$vo.claimed}</th>
+					<th>{$vo.claimedzname}</th>
+					<th>{$vo.claimedschool}</th>
+					<th>{$vo.claimcontent}</th>
+					<th>
+    						<!--<a href="{:U('Detail/detail',array('id'=>$vo['recordid']))}"><button type="button" class="btn btn-info btn-sm">查看详情</button></a>>-->
+						<input type="hidden" name="claims_id" class="claims_id" value="{$vo['id']}" />
+						<input type="hidden" name="" class="id_hidden" value="{$vo['userid']}" />
+						
+						<a href="javascript:;" class="fenghao"><button type="button" class="btn btn-danger btn-sm">封号</button></a>
+						<input type="hidden" name="claims_id" class="claims_id" value="{$vo['id']}" />
+						<input type="hidden" name="" id="recordid" value="{$vo['recordid']}" />
+						<a href="javascript:;" class="delete"><button type="button" class="btn btn-danger btn-sm">删评论</button></a>
+					</th>
+				</tr>
+				</volist>
+			</tbody>
+        </table>
+        <script type="text/javascript">
+	    $(document).ready(function(){
+	        $('.fenghao').click(function(){
+	            var is = confirm("确定封号吗？");
+	           
+	            var claims_id = $(this).prev().prev().val();
+	            var hidden_id = $(this).prev().val();
+	            if(is){
+	            $.post("{:U('fenghao')}",{
+	                userid:hidden_id,
+	                claims_id:claims_id
+	            },function(data){
+	                alert(data);
+	                window.location.href="{:U('Admin/comment_manage')}";
+	            })
+	            }
+	        });
+	        
+	        $('.delete').click(function(){
+	            var claims_id = $(this).prev().prev().val();
+	            var is = confirm("确定删除此评论吗？");
+	            var recordid = $(this).prev().val();
+	            if(is){
+	            $.post("{:U('delete_com')}",{
+	                recordid:recordid,
+	                claims_id:claims_id
+	            },function(data){
+	                alert(data);
+	                window.location.href="{:U('Admin/comment_manage')}";
+	            });
+	            }
+	        });
+	    });
+</script>
+    </body>
+</html>

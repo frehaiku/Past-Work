@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+	
+	<import type="js" file="js.jquery"/>
+	<import type="js" file="js.bootstrap" />
+	<import type="css" file="css.bootstrap" />
+	<title>帖子举报 | 惠州高中生网跳蚤市场</title>
+	<style>
+		*{margin:0;padding:0;font-family: "微软雅黑";}
+		#TopNav{
+				padding: 12px;
+				border-bottom: 1px solid #efefef;
+			}
+		#btn_claims{
+			margin-top: 10px;
+		}
+	</style>
+</head>
+<body>
+	
+	<div class="col-xs-12" id="TopNav" style="background:#fff">
+			<a href="javascript:history.go(-1)" style="color:#000;text-decoration:none;">
+			<span class="glyphicon glyphicon-menu-left" aria-hidden="true" aria-hidden="true"></span>
+			返回
+			</a>
+		</div>
+	<h2 style="margin-top:0px;">帖子举报</h2>
+	<textarea name="" id="cm_content" class="form-control" rows="5" required="required" placeholder="请填写要举报的原因"></textarea>
+	<input type="button" class="btn btn-success col-xs-offset-8" value="提交举报信息" id="btn_claims" />
+	
+	
+	<script type="text/javascript">
+	$(document).ready(function(){
+	    
+		$("#btn_claims").click(function(){
+		    if($("#cm_content").val().trim() == ""){
+		        $("#cm_content").css('border','1px solid red');
+		    }else{
+		        
+		        $.post("{:U('Index/submit_claims')}",{
+				cm_content:$("#cm_content").val(),
+				id:"{$Think.get.id}"
+			},function(data){
+                alert(data);
+                setTimeout(window.location.href="{:U('Detail/detail')}&id={$Think.get.id}",1500);
+			});
+		        
+		   }
+			
+		});
+	});
+</script>
+	
+</body>
+
+</html>

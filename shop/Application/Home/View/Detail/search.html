@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximux=1,user-scaleble=no">
+    <title>搜索 | 惠州高中生网跳蚤市场</title>
+    <import type="js" file="js.jquery" />
+    <import type="js" file="js.bootstrap" />
+    <import type="css" file="css.bootstrap,css.index" />
+</head>
+
+<body>
+    
+    	<h3>搜索</h3>
+    	 <div id="Home" class="col-xs-2 " style="float:left;position:absolute;top:5px;right:105px;">
+                <button type="button" class="btn btn-lg btn-default col-xs-offset-3" style="border:0;background:#06cab4;margin-top:10px;float:left;">
+                    <a href="{:U('Index/index','p=1')}" style="color:rgba(255,255,255,0.7);"><span class="glyphicon glyphicon-home" aria-hidden="true"></span></a>
+                </button>
+            </div>
+
+            <div id="Person" class="col-xs-2 col-xs-offset-1" style="float:left;position:absolute;right:25px;top:5px;">
+                <button type="button" class="btn btn-lg btn-default col-xs-offset-3" style="border:0;background:#06cab4;margin-top:10px;">
+                    <a href="{:U('Detail/person')}" style="color:rgba(255,255,255,0.7);"><span class="glyphicon glyphicon-user" aria-hidden="true"></span></a>
+                </button>
+            </div>
+        <div class="col-xs-12" id="top_search" style="margin-top:20px;">
+            <div class="input-group">
+                <input type="text" name="search" id="Search" class="form-control" value="" required="required" title="" placeholder="请输入要搜索商品的名字">
+                <span class="input-group-btn">
+       				<button class="btn btn-default" type="button" id="Go">Go!</button>
+      			</span>
+            </div>
+            <ul class="list-group" id="TipPlay">
+            </ul>
+        </div>
+        <!-- 搜索结果 -->
+        <div id="IssueContent" class="col-xs-12">
+            <ul class="content_ul">
+            	<if condition="$Think.get.sou neq ''">
+                <volist name="search_res" id="vo" empty="$empty">
+                    <a href="{:U('Detail/detail',array('id'=>$vo['id']))}" class="a_detail">
+                        <li class="detail_block">
+                            <php>
+                                $formatUrl = '__ROOT__/' . preg_replace('/^\/\./', '', $vo['goodsimageurl']);
+                            </php>
+                            <img class="ImageUrl img-responsive" src="{$formatUrl}" width="">
+                            <p class="goodsname">{$vo.goodsname}</p>
+                            <div class="describe col-xs-12">
+                                <span class="price">￥{$vo.goodsprice}</span>
+                                <span class="date">{$vo.goodstime}</span>
+                            </div>
+                        </li>
+                    </a>
+                </volist>
+                </if>
+            </ul>
+        </div>
+    
+</body>
+<script type="text/javascript">
+$(document).ready(function() {
+
+    var append_content = "";
+    
+    //搜索框输入ajax
+    $("#Search").keyup(function() {
+
+            if ($(this).val() !== "") {
+
+                $.post("{:U('tipsearch')}", {
+                    word: $("#Search").val()
+                }, function(data) {
+                    //当输入不符合时，将之前的元素清除
+                    $("#TipPlay").empty();
+                    append_content = "";
+                    for (var i = 0; i < data.length; i++) {
+                        append_content += "<li class='list-group-item'>" + data[i]['goodsname'] + "</li>";
+
+                    };
+                    $("#TipPlay").html(append_content);
+                });
+            }
+
+        })
+        //点击提示内容，搜索框变此内容
+    $(document).on("click", "#TipPlay li", function() {
+        var clk = $(this).html();
+        $('#Search').val(clk);
+        $("#TipPlay").empty();
+
+    });
+    /*点击搜索按钮*/
+    // var res_content="";
+    // $("#Go").click(function(){
+    // 	 var word=$("#Search").val();
+    // 	 $.get("{:U('search_submit')}",{
+    // 	 	sou:word
+    // 	 },function(data){
+
+    // 	 	for (var i = 0; i < data.length; i++) {
+    // 	 		res_content += "<a href='" + "{:U('Detail/detail',array('id'=>"+data[i]['id']+"))}"+"' class='a_detail'><li class='detail_block'><img class='ImageUrl img-responsive' src='" +data[i]['goodsimageurl']+ "' width='><p>"+data[i]['goodsname']+"</p><div class='describe col-xs-12'><span class='price'>"+data[i]['goodsprice']+"</span><span class='date'>"+data[i]['goodstime']+"</span></div></li></a>";
+
+    // 	 	};
+    // $("#IssueContent ul").html(res_content);
+    // 	 	});
+    // });
+    $("#Go").click(function() {
+        var word = $("#Search").val();
+        window.location.href = "{:U('search')}&sou=" + word;
+    });
+
+
+    var IssueContentWidth = $("#IssueContent").width();
+    $("#IssueContent li.detail_block").css({
+        'width': IssueContentWidth / 2 - 4 + 'px'
+    });
+
+
+    //日期处理
+    $(".describe .date").each(function(index, element) {
+
+        var content = $(element).html();
+
+
+        $(element).html(content.slice(0, 10));
+    });
+
+    //将搜索字变橙色
+    
+    // $(".goodsname").each(function(index,element){
+    // 	var name=$(element).html();
+    // 	var sou = "{$Think.get.sou}";
+
+    // 	var arr_sp=name.split("");
+    // 	var arr_sou = sou.split("");
+
+    // 		for (var i = 0; i < arr_sp.length; i++) {
+    // 			for (var i = 0; i < arr_sou.length; i++) {
+    // 				if(arr_sou[i]==arr_sp[i]){
+    // 					// arr_sp[i].style.color="orange";
+    // 					console.log(arr_sp[i]);
+    // 				}
+    // 			};
+
+    // 		};
+    // })
+});
+</script>
+
+</html>

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+    <import type="js" file="js.jquery" />
+    <import type="js" file="js.bootstrap" />
+    <import type="css" file="css.bootstrap" />
+    <title>请保存您的信息,不能更改的哟 | 惠州高中生网跳蚤市场</title>
+    <script>
+    var option = ["惠州市第一中学", "惠州市第三中学", "惠州市第四中学", "惠州市第八中学", "惠州市东江高级中学", "惠州市华罗庚中学", "惠州市惠港中学", "惠州市凌田中学", "惠州市实验中学", "惠州市田家炳中学", "惠州市小金口中学", "黄冈中学惠州学校",
+        "惠州光正实验学校", "惠州综合高级中学", "惠州一中实验学校", "惠阳区崇雅中学", "惠阳一中实验学校", "惠阳中山中学", "惠阳高级中学", "华师附属惠阳学校", "惠东县高级中学", "惠东县惠东中学", "惠东县平山中学", "惠东县荣超中学", "龙门县高级中学", "龙门县龙门中学", "龙门县永汉中学", "博罗县博罗中学", "博罗县高级中学", "博罗县华侨中学", "博罗县三乡中学", "博罗县石湾中学", "博罗县杨侨中学", "惠州市仲恺中学", "大亚湾第一中学"
+    ];
+    console.log(option.length);
+    $(document).ready(function(){
+
+    var op="";
+    for (var i = 0; i < option.length; i++) {
+    	op+= "<option>"+option[i]+"</option>";
+    };
+
+    $("#school").html(op);
+
+    });
+    
+    </script>
+</head>
+
+<body>
+    
+        <h4>个人中心，请完善好个人信息</h4>
+        <form class="form-horizontal" style="padding:13px;">
+        	<div class="form-group">
+                <label for="school" class="col-xs-3">学校</label>
+				<div class="col-xs-9 ">
+            	<select name="school" id="school" class="form-control ">
+            	</select></div>
+            </div>
+            <div class="form-group">
+                <label for="nname" class="col-xs-3">公开昵称</label>
+                <div class="col-xs-9">
+                    <input type="text" name="nname" id="nname" class="form-control" value="" required="required" placeholder="请填写公开昵称">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="zname" class="col-xs-3">真实姓名</label>
+                <div class="col-xs-9">
+                    <input type="text" name="zname" id="zname" class="form-control" value="" required="required" placeholder="请填写真实姓名,写后不能更改!!">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="kaohao" class="col-xs-3">考号</label>
+                <div class="col-xs-9">
+                    <input type="text" name="kaohao" id="kaohao" class="form-control" value="" required="required" placeholder="请填写惠州一调考号">
+                </div>
+            </div>
+            <div class="form-group">
+            	<label for="sex" class="col-xs-3">性别</label>
+            	<div class="radio col-xs-9">
+            		<label>
+            			<input type="radio" name="sex" id="male" value="男" checked="checked">
+            			男
+            		</label>
+            		<label>
+            			<input type="radio" name="sex" id="female" value="女">
+            			女
+            		</label>
+            	</div>
+            </div>
+            <input type="button" class="btn btn-success" id="save" value="保存" />
+        </form>
+    
+    <script>
+    	$("#save").click(function(){
+
+    			$.ajax({
+    				url:"{:U('Detail/saveuser')}",
+    				type:'post',
+    				data:{"school":$("#school").val(),
+    					"nname":$("#nname").val(),
+    					"zname":$("#zname").val(),
+    					"kaohao":$("#kaohao").val(),
+    					"sex":$("input[type='radio']:checked").val()},
+    				error:function(){
+    					alert('服务器出错,请重试');
+    				},
+    				success:function(data){
+    					alert(data);
+    					setTimeout(window.location.href="{:U('Index/index')}",1500);
+    					
+    				}
+    				});
+
+    	});
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+	<import type="js" file="js.jquery"/>
+	<import type="js" file="js.bootstrap" />
+	<import type="css" file="css.bootstrap" />
+	<title>举报查看</title>
+	<style>
+		*{margin:0;padding:0;font-family: "微软雅黑";}
+		button a{color:#fff;font-size:11px;}
+	</style>
+</head>
+<body>
+	<div class="container">
+		<h2>举报信息查看<button type="button" id="btn_com_manage" class="btn btn-info col-xs-offset-2">评论管理，点这里</button></h2>
+		
+		<script>
+		    $("#btn_com_manage").click(function(){
+		        window.location.href="{:U('Admin/comment_manage')}";
+		    });
+		    
+		</script>
+    <div class="col-xs-12">
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th>举报人id</th>
+					<th>举报人姓名</th>
+					<th>举报人学校</th>
+					<th>被举报人id</th>
+					<th>别举报人姓名</th>
+					<th>被举报人学校</th>
+					<th>用户举报理由</th>
+				</tr>
+			</thead>
+			<tbody>
+			    <volist name="claims" id="vo">
+				<tr>
+					<th>{$vo.claim}</th>
+					<th>{$vo.claimzname}</th>
+					<th>{$vo.claimschool}</th>
+					<th>{$vo.claimed}</th>
+					<th>{$vo.claimedzname}</th>
+					<th>{$vo.claimedschool}</th>
+					<th>{$vo.claimcontent}</th>
+					<th>
+						<a href="{:U('Detail/detail',array('id'=>$vo['recordid']))}"><button type="button" class="btn btn-info btn-sm">查看详情</button></a>
+						<input type="hidden" name="claims_id" class="claims_id" value="{$vo['id']}" />
+						<input type="hidden" name="" class="id_hidden" value="{$vo['userid']}" />
+						
+						<a href="javascript:;" class="fenghao"><button type="button" class="btn btn-danger btn-sm">封号</button></a>
+						<input type="hidden" name="claims_id" class="claims_id" value="{$vo['id']}" />
+						<input type="hidden" name="" id="recordid" value="{$vo['recordid']}" />
+						<a href="javascript:;" class="delete"><button type="button" class="btn btn-danger btn-sm">删帖</button></a>
+					</th>
+				</tr>
+				</volist>
+			</tbody>
+		</table>
+	</div>
+	</div>
+</body>
+<script type="text/javascript">
+	    $(document).ready(function(){
+	        $('.fenghao').click(function(){
+	            var is = confirm("确定封号吗？");
+	           
+	            var claims_id = $(this).prev().prev().val();
+	            var hidden_id = $(this).prev().val();
+	            if(is){
+	            $.post("{:U('fenghao')}",{
+	                userid:hidden_id,
+	                claims_id:claims_id
+	            },function(data){
+	                alert(data);
+	                
+	            })
+	            }
+	        });
+	        
+	        $('.delete').click(function(){
+	            var claims_id = $(this).prev().prev().val();
+	            var is = confirm("确定删除此贴吗？");
+	            var recordid = $(this).prev().val();
+	            if(is){
+	            $.post("{:U('delete_tie')}",{
+	                recordid:recordid,
+	                claims_id:claims_id
+	            },function(data){
+	                alert(data);
+	                window.location.href="{:U('Admin/admin')}";
+	            });
+	            }
+	        });
+	    });
+</script>
+</html>

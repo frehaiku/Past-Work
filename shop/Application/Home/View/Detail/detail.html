@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+	
+	<import type="js" file="js.jquery"/>
+	<import type="js" file="js.bootstrap" />
+	<import type="css" file="css.bootstrap,css.detail" />
+	<title>商品详情</title>
+</head>
+<body>
+	
+		<div class="col-xs-12" id="TopNav" style="background:#fff">
+			<a href="javascript:history.go(-1)" style="color:#000;text-decoration:none;">
+			<span class="glyphicon glyphicon-menu-left" aria-hidden="true" aria-hidden="true"></span>
+			返回列表
+			</a>
+		</div>
+		<div class="container">
+			<foreach name="id_detail" item="vo">
+			<div class="col-xs-12 wrapper">
+				<div class="col-xs-12">
+					<php>
+						$formatUrl = '__ROOT__/' . preg_replace('/^\/\./', '', $vo['goodsimageurl']);
+					</php>
+					<img src="{$formatUrl}" class="img-responsive" alt="Image">
+				</div>
+				<script>
+				    document.title = "{$vo.goodsname}" + " | " + "{$vo.school}" + "跳蚤市场";
+				</script>
+				<div class="col-xs-12" id="GoodsName">
+					{$vo.goodsname}
+					<!--{$Think.cookie.id}-->
+					<eq name="Think.cookie.id" value="$vo['user']">
+					<a href="{:U('Index/claims')}&id={$Think.get.id}" id="claimBtn">举报该帖子</a>
+					</eq>
+					<input type="hidden" name="{$vo.user}" id="xxx" value="{$Think.cookie.id}" />
+				</div>
+				<div class="col-xs-12" id="GoodsPrice">
+					￥{$vo.goodsprice}
+				</div>
+				<p class="col-xs-12">
+					<span class="col-xs-6">联系人:</span>
+					<span class="col-xs-6">{$vo.nname}
+					    <i class="icon_sex">
+					        <if condition="$vo.sex eq '女'">
+					            <img src="__ROOT__/Public/images/female.jpg" alt="" width="10">
+					            <else/>
+					            <img src="__ROOT__/Public/images/male.jpg" alt="" width="10">
+					        </if>
+					    </i>
+					</span>
+				</p>
+				<!--<p class="col-xs-12">-->
+				<!--	<span class="col-xs-6">联系方式：</span>-->
+				<!--	<span class="col-xs-6">{$vo.contactsphone}</span>-->
+				<!--</p>-->
+				<p class="col-xs-12">
+					<span class="col-xs-6">发布时间:</span>
+					<span class="col-xs-6">{$vo.goodstime}</span>
+				</p>
+				<p class="col-xs-12">
+					<span class="col-xs-6">所在学校:</span>
+					<a href="{:U('Index/index',array('school'=>$vo['school']))}"><span class="col-xs-6">{$vo.school}</span></a>
+				</p>
+			</div>
+			<div class="col-xs-12 wrapper">
+				<p style="word-break:break-word;">商品描述：{$vo.goodsdescribe}</p>
+			</div>
+			
+			    <volist name="comment" id="vo1">
+			        <div class="col-xs-12 comment">
+    			        <p class="peoplesay">{$vo1.commentnname}说：
+    			            <a href="javascript:;" class="claims_com" style="font-size:10px;position:absolute;right:0px;">举报该评论</a>
+    			            <input type="hidden" name="comid" class="comid" value="{$vo1.id}" />
+    			        </p>
+    			        <p class="quote">{$vo1.commentcontent}
+    			            
+    			        </p>
+			        </div>
+			    </volist>
+			    
+			<div class="col-xs-12" >
+			    <h4 style="border-left:3px solid #5cb85c;padding-left:10px;">发表评论</h4>
+			    <textarea name="" id="cm_content" class="form-control" rows="5" required="required" placeholder="你可以发表你的评论哟"></textarea>
+	            <button type="button" class="btn btn-success col-xs-12" id="btn_comment" style="margin:20px 0;">提交评论</button>
+	            <input type="hidden" name="commentedid" id="commentedid" value="{$vo.orderid}" />
+	       </div>
+			</div>
+			</foreach>
+
+			<!-- <div class="col-xs-12" id="BottomBut">-->
+			<!--	<button type="button" class="btn btn-default" id="ContactsBuyter">-->
+			<!--	<a href="tel:{$vo.contactsphone}">联系卖家</a>-->
+				
+			<!--	</button>-->
+			<!--</div> -->
+			
+</body>
+	<script>
+		$(document).ready(function(){
+		    
+		    
+		    $(".claims_com").click(function(){
+		        var comid =  $(this).next().val();
+		        var is=confirm("确定举报该评论吗？");
+		       if(is){
+		            $.post("{:U('Admin/claims_com')}",{
+		            comid:comid
+		        },function(data){
+		            alert(data);
+		        });
+		       }
+		       
+		    })
+		    
+		    
+		    
+		    //alert($("#commentedid").val());
+			//让fixed定位的元素不遮挡描述
+				var ButHgt = $("#BottomBut").height();
+				var SelfHgt = $("body").height();
+				//console.log(SelfHgt);
+				$("body").height(SelfHgt + ButHgt);
+				
+			$("#btn_comment").click(function(){
+			    var cm_content = $("#cm_content").val();
+			   if(cm_content.trim() != ""){
+
+
+			       $.ajax({
+			           url:"{:U('Detail/btn_comment')}",
+					   type: 'POST',
+			           data:{
+				    detailid:"{$Think.get.id}",
+				    commentedid:$("#commentedid").val(),
+				    commentcontent:cm_content
+				    },timeout:20000,
+				    beforeSend:function(){
+				        $(this).css({background:'#efefef'});
+				        $(this).html("提交中···");
+				    },error:function(){
+				        alert("网络出故障了···");
+				    },success:function(data){
+				        $(this).css({background:'#5cb85c'});
+				        $(this).html("提交评论");
+				        alert(data);
+				    location.reload();
+				    }
+			       })
+			    
+			  }else{
+			      $(this).prev().css("border","1px solid red");
+			  }
+			})
+				
+				
+				
+		});
+	</script>
+</html>

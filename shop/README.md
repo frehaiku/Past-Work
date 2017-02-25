@@ -44,3 +44,13 @@
     1. Follow "驴行记" official Account
     2. Send the message "2015二手市场"
     3. Click the href enter into the Work
+    
+## Feature
+
+- User `openid` to build a user system, the first operation need to improve personal information
+- Publish the goods using `enctype="multipart/form-data"` to synchronously submit form, preview the picture using the `FileReader` interface,use `filter` compatible IE
+- Merchandise list page supports viewing into different schools
+- Product details page support comment consultation feature
+- Support product name search feature
+- For some bad information, we can report it
+- the admin page can freeze user's account(later can not be released) and delete the post

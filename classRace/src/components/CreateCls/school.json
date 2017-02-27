@@ -1,0 +1,173 @@
+[{
+  "name": "惠城区",
+  "value": "huicheng",
+  "parent": 0
+}, {
+  "name": "惠阳区",
+  "value": "huiyang",
+  "parent": 0
+}, {
+  "name": "惠东县",
+  "value": "huidong",
+  "parent": 0
+}, {
+  "name": "博罗县",
+  "value": "boluo",
+  "parent": 0
+}, {
+  "name": "龙门县",
+  "value": "longmen",
+  "parent": 0
+}, {
+  "name": "开发区",
+  "value": "kaifaqu",
+  "parent": 0
+}, {
+  "name": "惠州市第一中学",
+  "value": "惠州市第一中学",
+  "parent": "huicheng"
+}, {
+  "name": "惠州市第三中学",
+  "value": "惠州市第三中学",
+  "parent": "huicheng"
+}, {
+  "name": "惠州市第四中学",
+  "value": "惠州市第四中学",
+  "parent": "huicheng"
+}, {
+  "name": "惠州市第八中学",
+  "value": "惠州市第八中学",
+  "parent": "huicheng"
+}, {
+  "name": "惠州市东江高级中学",
+  "value": "惠州市东江高级中学",
+  "parent": "huicheng"
+}, {
+  "name": "惠州市华罗庚中学",
+  "value": "惠州市华罗庚中学",
+  "parent": "huicheng"
+}, {
+  "name": "惠州市惠港中学",
+  "value": "惠州市惠港中学",
+  "parent": "huicheng"
+}, {
+  "name": "惠州市凌田中学",
+  "value": "惠州市凌田中学",
+  "parent": "huicheng"
+}, {
+  "name": "惠州市实验中学",
+  "value": "惠州市实验中学",
+  "parent": "huicheng"
+}, {
+  "name": "惠州市田家炳中学",
+  "value": "惠州市田家炳中学",
+  "parent": "huicheng"
+}, {
+  "name": "惠州市小金口中学",
+  "value": "惠州市小金口中学",
+  "parent": "huicheng"
+}, {
+  "name": "黄冈中学惠州学校",
+  "value": "黄冈中学惠州学校",
+  "parent": "huicheng"
+}, {
+  "name": "惠州光正实验学校",
+  "value": "惠州光正实验学校",
+  "parent": "huicheng"
+}, {
+  "name": "惠州综合高级中学",
+  "value": "惠州综合高级中学",
+  "parent": "huicheng"
+}, {
+  "name": "惠州一中实验学校",
+  "value": "惠州一中实验学校",
+  "parent": "huicheng"
+}, {
+  "name": "惠州市江南学校",
+  "value": "惠州市江南学校",
+  "parent": "huicheng"
+}, {
+  "name": "惠阳崇雅中学",
+  "value": "惠阳崇雅中学",
+  "parent": "huiyang"
+}, {
+  "name": "惠阳一中实验学校",
+  "value": "惠阳一中实验学校",
+  "parent": "huiyang"
+}, {
+  "name": "惠阳中山中学",
+  "value": "惠阳中山中学",
+  "parent": "huiyang"
+}, {
+  "name": "惠阳高级中学",
+  "value": "惠阳高级中学",
+  "parent": "huiyang"
+}, {
+  "name": "华师附属惠阳学校",
+  "value": "华师附属惠阳学校",
+  "parent": "huiyang"
+}, {
+  "name": "惠东县高级中学",
+  "value": "惠东县高级中学",
+  "parent": "huidong"
+}, {
+  "name": "惠东县惠东中学",
+  "value": "惠东县惠东中学",
+  "parent": "huidong"
+}, {
+  "name": "惠东县平山中学",
+  "value": "惠东县平山中学",
+  "parent": "huidong"
+}, {
+  "name": "惠东县荣超中学",
+  "value": "惠东县荣超中学",
+  "parent": "huidong"
+}, {
+  "name": "惠东燕岭学校",
+  "value": "惠东燕岭学校",
+  "parent": "huidong"
+}, {
+  "name": "龙门县高级中学",
+  "value": "龙门县高级中学",
+  "parent": "longmen"
+}, {
+  "name": "龙门县龙门中学",
+  "value": "龙门县龙门中学",
+  "parent": "longmen"
+}, {
+  "name": "龙门县永汉中学",
+  "value": "龙门县永汉中学",
+  "parent": "longmen"
+}, {
+  "name": "博罗县博师高级中学",
+  "value": "博罗县博师高级中学",
+  "parent": "boluo"
+}, {
+  "name": "博罗县博罗中学",
+  "value": "博罗县博罗中学",
+  "parent": "boluo"
+}, {
+  "name": "博罗县华侨中学",
+  "value": "博罗县华侨中学",
+  "parent": "boluo"
+}, {
+  "name": "博罗县三乡中学",
+  "value": "博罗县三乡中学",
+  "parent": "boluo"
+}, {
+  "name": "博罗县石湾中学",
+  "value": "博罗县石湾中学",
+  "parent": "boluo"
+}, {
+  "name": "博罗县杨侨中学",
+  "value": "博罗县杨侨中学",
+  "parent": "boluo"
+}, {
+  "name": "惠州市仲恺中学",
+  "value": "惠州市仲恺中学",
+  "parent": "kaifaqu"
+}, {
+  "name": "大亚湾第一中学",
+  "value": "大亚湾第一中学",
+  "parent": "kaifaqu"
+}]

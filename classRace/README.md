@@ -1,6 +1,6 @@
 # best-class
 
-> 班级评比大赛
+> 班级评比大赛-[在线地址](https://github.com/frehaiku/Past-Work/tree/master/classRace)
 
 ## Build Setup
 

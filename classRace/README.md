@@ -1,6 +1,6 @@
 # best-class
 
-> 班级评比大赛-[在线地址](https://github.com/frehaiku/Past-Work/tree/master/classRace)
+> 班级评比大赛-[在线地址](http://huizhou.us/a/best-class-informality/#!/Ballot)
 
 ## Build Setup
 

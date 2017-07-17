@@ -1,0 +1,65 @@
+@import "custom";
+.inform-wrapper ul.of {
+  margin-top: .2rem;
+  margin-left: .1rem;
+  margin-right: .1rem;
+  li.parent-l-hasBefore:before {
+    content: '';
+    display: inline-block;
+    width: .04rem;
+    height: .24rem;
+    background-color: @fontPink;
+    margin-right: .2rem;
+  }
+  .listHeader:before {
+    content: '';
+    display: inline-block;
+    width: .04rem;
+    height: .24rem;
+    background-color: @fontPink;
+    margin-right: .2rem;
+  }
+  li.parent-l:first-of-type {
+    margin-top: .2rem;
+  }
+
+  li.parent-l, li.nobeforeline {
+    border-radius: .1rem;
+    background: #ffffff;
+    margin-bottom: .2rem;
+    font-size: .26rem;
+    color: @fontDeepGray;
+    padding-right: .3rem;
+    padding-left: .45rem;
+    padding-top: .3rem;
+    padding-bottom: .3rem;
+    i.arrow {
+      -webkit-transition: all .5s ease-out;
+      transition: all .5s ease-out;
+      float: right;
+      margin-top: .05rem;
+      background: url("~imgPath/rightArrow.png");
+      display: inline-block;
+      width: .14rem;
+      height: .24rem;
+      -webkit-background-size: cover;
+      background-size: cover;
+      vertical-align: middle;
+    }
+    i.arrowactive{
+      -webkit-transform: rotate(90deg);
+      transform: rotate(90deg);
+    }
+    i.warn {
+      vertical-align: middle;
+      float: right;
+      margin-right: .2rem;
+      background: url("~imgPath/warn.png");
+      display: inline-block;
+      width: .32rem;
+      height: .32rem;
+      -webkit-background-size: cover;
+      background-size: cover;
+    }
+  }
+}

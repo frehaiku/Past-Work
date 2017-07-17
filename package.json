@@ -1,0 +1,7 @@
+{
+  "dependencies": {
+    "array-filter": "^1.0.0",
+    "array-find": "^1.0.0",
+    "array-map": "^0.0.0"
+  }
+}

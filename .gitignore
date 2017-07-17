@@ -1,3 +1,6 @@
 .idea
 Runtime
 Uploads
+node_modules
+dist
+npm-debug.log

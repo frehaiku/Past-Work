@@ -51,24 +51,21 @@
       },
       imgPreview(file) {
         let self = this;
-        if (!file || !window.FileReader) {
-
-          return
-        }
+        if (!file || !window.FileReader) return
 
         if (/^image/.test(file.type)) {
 
-          var reader = new FileReader();
+          let reader = new FileReader();
           reader.readAsDataURL(file);
 
           reader.onloadend = function () {
             self.dataUrl = this.result;
 
-            var img = new Image();
+            let img = new Image();
             img.src = this.result;
 
             img.onload = function () {
-              var data = self.compressImg(this)
+              let data = self.compressImg(this)
               self.dataUrl = data; //压缩后的图片 data
 
               //处理图片，上传后台
@@ -79,16 +76,16 @@
                 ia[i] = data.charCodeAt(i);
               }
               //canvas.toDataURL 返回的默认格式就是 image/png
-              var blob = new Blob([ia], {
+              const blob = new Blob([ia], {
                 type: "image/jpeg"
               });
-              var fd = new FormData();
+              let fd = new FormData();
               fd.append("uploadFile", blob);
               fd.append('accountName', 'alex')
               fd.append('password', '123456')
 
               // 上传图片
-              this.$interfaces.upload(this, fd)
+              self.$interfaces.upload(self, fd)
                       .then(response => {
                         self.$emit('on-upload', {
                           path: response.url,

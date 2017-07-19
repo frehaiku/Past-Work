@@ -75,6 +75,8 @@
     
 ```
 
+（由于线上接口不稳定，为保证能正常演示，现将接口数据使用[easymask](https://easy-mock.com/)模拟。所以某些数据是雷同，点击详情页看到相同数据时不用惊讶，这不是Bug）
+
 ## 技术栈
 
 - WebPack + ES6 + Vue2.x + Vue-Router + Vuex + Vue-Loader
